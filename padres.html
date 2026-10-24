@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmar Asistencia · Bianca & Rauli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f3ea;
+    --text: #3f4127;
+    --muted: #7a7c63;
+    --line: #b9b9a0;
+    --error: #8a3b2e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 64px;
+  }
+  .wrap { width: 100%; max-width: 480px; text-align: center; }
+  h1 {
+    font-weight: 300;
+    font-size: 2.1rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    padding-left: 0.35em;
+  }
+  .sub {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 4px;
+  }
+  .when { font-size: 1.3rem; margin: 0 0 22px; }
+  .events { margin: 0 0 40px; }
+  .event { margin-bottom: 20px; }
+  .event span { display: block; }
+  .ev-label { font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .ev-name { font-size: 1.35rem; font-weight: 500; }
+  .ev-addr { font-size: 1.1rem; color: var(--muted); line-height: 1.35; }
+  form { text-align: left; }
+  .field { margin-bottom: 28px; }
+  label, .legend {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    padding: 8px 0;
+    font-family: inherit;
+    font-size: 1.25rem;
+    color: var(--text);
+    outline: none;
+    -webkit-appearance: none;
+  }
+  textarea { resize: vertical; min-height: 70px; }
+  input:focus, textarea:focus { border-bottom-color: var(--text); }
+  .radios { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .radios label {
+    display: flex; align-items: center; gap: 12px;
+    text-transform: none; letter-spacing: 0.02em;
+    font-size: 1.25rem; color: var(--text); margin: 0; cursor: pointer;
+  }
+  input[type="radio"] { accent-color: var(--text); width: 18px; height: 18px; margin: 0; }
+  button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .error { color: var(--error); font-size: 1.05rem; margin-top: 14px; min-height: 1.2em; text-align: center; }
+  .optional { text-transform: none; letter-spacing: 0.05em; font-size: 0.9rem; }
+
+  .done { display: none; padding-top: 24px; }
+  .done h2 { font-weight: 300; font-size: 1.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 14px; }
+  .done p { font-size: 1.3rem; margin: 0 0 10px; }
+  .done .tick { font-size: 2.4rem; margin-bottom: 8px; }
+  .link {
+    background: none; border: none; width: auto; padding: 6px 0; margin-top: 22px;
+    color: var(--muted); text-decoration: underline; letter-spacing: 0.12em; font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Bianca & Rauli</h1>
+  <p class="sub">Confirmar asistencia</p>
+  <p class="when">Sábado 27 de febrero de 2027</p>
+
+  <div class="events">
+    <div class="event">
+      <span class="ev-label">Ceremonia · 16:30 hs</span>
+      <span class="ev-name">Nuestra Señora de la Candelaria</span>
+      <span class="ev-addr">Calle 16 (El Mesana) y Calle 30, Península,<br>Punta del Este, Uruguay</span>
+    </div>
+    <div class="event">
+      <span class="ev-label">Recepción y fiesta · desde las 19:00 hs</span>
+      <span class="ev-name">Narbona Punta del Este, El Galpón</span>
+      <span class="ev-addr">Camino de la Vid 20000,<br>Punta del Este, Uruguay</span>
+    </div>
+  </div>
+
+  <form id="rsvp" novalidate>
+    <div class="field">
+      <label for="nombre">Nombre y apellido</label>
+      <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+    </div>
+
+    <div class="field">
+      <span class="legend">¿Nos acompañás en el casamiento?</span>
+      <div class="radios">
+        <label><input type="radio" name="asiste" value="Sí"> Sí, ahí estaré</label>
+        <label><input type="radio" name="asiste" value="No"> No podré asistir</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="restriccion">Restricción alimentaria <span class="optional">(opcional)</span></label>
+      <input type="text" id="restriccion" name="restriccion" placeholder="Vegetariano, celíaco, alergias…">
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+
+    <div class="field">
+      <label for="mensaje">Mensaje <span class="optional">(opcional)</span></label>
+      <textarea id="mensaje" name="mensaje"></textarea>
+    </div>
+
+    <button type="submit" id="btn">Enviar</button>
+    <div class="error" id="error" role="alert"></div>
+  </form>
+
+  <div class="done" id="done" aria-live="polite">
+    <div class="tick">✓</div>
+    <h2>¡Recibido!</h2>
+    <p id="doneMsg"></p>
+    <p>Gracias por acompañarnos.</p>
+    <button type="button" class="link" id="otra">Confirmar a otra persona</button>
+  </div>
+</div>
+
+<script>
+  // Pegá acá la URL de la implementación de Apps Script (termina en /exec)
+  var SCRIPT_URL = 'PEGA_ACA_TU_URL_DE_APPS_SCRIPT';
+
+  var form = document.getElementById('rsvp');
+  var btn = document.getElementById('btn');
+  var errorBox = document.getElementById('error');
+  var done = document.getElementById('done');
+  var doneMsg = document.getElementById('doneMsg');
+  var sending = false;
+  var submissionId = newId();
+
+  function newId() {
+    return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  }
+
+  function showDone(nombre, asiste) {
+    doneMsg.textContent = asiste === 'Sí'
+      ? nombre + ', tu asistencia quedó confirmada.'
+      : nombre + ', registramos que no vas a poder venir. ¡Te vamos a extrañar!';
+    form.style.display = 'none';
+    done.style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (sending) return;                       // bloquea clicks repetidos
+
+    var nombre = form.nombre.value.trim();
+    var asisteEl = form.querySelector('input[name="asiste"]:checked');
+    errorBox.textContent = '';
+
+    if (!nombre) { errorBox.textContent = 'Escribí tu nombre y apellido.'; form.nombre.focus(); return; }
+    if (!asisteEl) { errorBox.textContent = 'Contanos si vas a asistir.'; return; }
+    var email = form.email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorBox.textContent = 'Escribí un email válido.'; form.email.focus(); return; }
+    if (SCRIPT_URL.indexOf('PEGA_ACA') === 0) { errorBox.textContent = 'Falta configurar la URL del script.'; return; }
+
+    sending = true;
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    var body = new URLSearchParams();
+    body.set('id', submissionId);
+    body.set('nombre', nombre);
+    body.set('asiste', asisteEl.value);
+    body.set('restriccion', form.restriccion.value.trim());
+    body.set('email', email);
+    body.set('mensaje', form.mensaje.value.trim());
+
+    fetch(SCRIPT_URL, { method: 'POST', body: body })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.result === 'success') {
+          try { localStorage.setItem('rsvp_enviado', nombre); } catch (e) {}
+          showDone(nombre, asisteEl.value);
+        } else {
+          throw new Error('bad response');
+        }
+      })
+      .catch(function () {
+        // Mismo ID: si el envío anterior sí llegó, reintentar NO duplica la fila.
+        errorBox.textContent = 'No pudimos confirmar el envío. Probá de nuevo en unos segundos.';
+        sending = false;
+        btn.disabled = false;
+        btn.textContent = 'Enviar';
+      });
+  });
+
+  document.getElementById('otra').addEventListener('click', function () {
+    form.reset();
+    submissionId = newId();
+    sending = false;
+    btn.disabled = false;
+    btn.textContent = 'Enviar';
+    errorBox.textContent = '';
+    done.style.display = 'none';
+    form.style.display = 'block';
+  });
+</script>
+</body>
+</html>
