@@ -5,210 +5,292 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bianca &amp; Rauli — Confirmar Asistencia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f7f3ea;
-    --ink: #2c2c22;
-    --olive-dark: #3f4127;
-    --line: #cfc9b4;
+    --bg: #f7f3ea;
+    --text: #3f4127;
+    --muted: #7a7c63;
+    --line: #b9b9a0;
+    --soft: #dcd6c3;
+    --error: #8a3b2e;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Cormorant Garamond', serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 60px 20px 80px;
+    padding: 40px 20px 64px;
   }
-  .card {
-    max-width: 460px;
-    width: 100%;
-  }
+  .wrap { width: 100%; max-width: 480px; text-align: center; }
 
-  .header {
-    text-align: center;
-    margin-bottom: 34px;
+  /* ---------- Encabezado compacto ---------- */
+  h1 {
+    font-weight: 300;
+    font-size: 1.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    padding-left: 0.35em;
   }
-  .header .eyebrow {
-    font-size: 0.85rem;
+  .sub {
+    font-size: 0.95rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #6b6b58;
-    margin: 0 0 10px;
-  }
-  .header h1 {
-    font-size: 1.9rem;
-    font-weight: 500;
-    margin: 0 0 14px;
-    line-height: 1.3;
-  }
-  .header p {
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: #4a4a3a;
-    margin: 0 0 6px;
-  }
-  .header .note {
-    font-size: 0.95rem;
-    font-style: italic;
-    color: #6b6b58;
-    margin-top: 16px;
+    color: var(--muted);
+    margin: 0 0 22px;
   }
 
-  form {
-    text-align: left;
+  .info {
+    border-top: 1px solid var(--soft);
+    border-bottom: 1px solid var(--soft);
+    padding: 6px 0;
+    margin-bottom: 34px;
   }
+  .grp { padding: 10px 0; }
+  .grp + .grp { border-top: 1px solid var(--soft); }
+  .day { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+  .row { padding: 5px 0; }
+  .row span { display: block; }
+  .lbl { font-size: clamp(0.6rem, 2.7vw, 0.72rem); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; white-space: nowrap; }
+  .nm  { font-size: 1.05rem; font-weight: 500; line-height: 1.25; }
+  .ad  { font-size: 0.92rem; color: var(--muted); line-height: 1.3; }
+  .row.pre .nm { font-weight: 400; }
+
+  /* ---------- Formulario (protagonista) ---------- */
+  .note { font-size: 1rem; font-style: italic; color: var(--muted); margin: 0 0 24px; }
+  form { text-align: left; }
+  .field { margin-bottom: 26px; }
   label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin: 20px 0 8px;
-    color: #6b6b58;
+    color: var(--muted);
+    margin-bottom: 6px;
   }
-  input[type="text"],
-  input[type="email"],
-  select,
-  textarea {
+  input[type="text"], input[type="email"], select, textarea {
     width: 100%;
-    padding: 11px 12px;
+    background: transparent;
     border: none;
     border-bottom: 1px solid var(--line);
     border-radius: 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    background: transparent;
-    color: var(--ink);
-  }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  select:focus,
-  textarea:focus {
+    padding: 9px 0;
+    font-family: inherit;
+    font-size: 1.25rem;
+    color: var(--text);
     outline: none;
-    border-bottom-color: var(--olive-dark);
+    -webkit-appearance: none;
+    appearance: none;
   }
-  textarea {
-    resize: vertical;
-    min-height: 60px;
+  select {
+    padding-right: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%237a7c63' stroke-width='1.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
   }
+  textarea { resize: vertical; min-height: 70px; }
+  input:focus, select:focus, textarea:focus { border-bottom-color: var(--text); }
+  .optional { text-transform: none; letter-spacing: 0.05em; font-size: 0.9rem; }
 
   button {
-    margin-top: 34px;
     width: 100%;
-    padding: 14px;
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--ink);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.22em;
+    margin-top: 8px;
+    padding: 16px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.25s, color 0.25s;
+    transition: opacity .2s;
   }
-  button:hover:not(:disabled) {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  button:disabled { opacity: 0.5; cursor: default; }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .error { color: var(--error); font-size: 1.05rem; margin-top: 14px; min-height: 1.2em; text-align: center; }
 
-  #status {
-    margin-top: 20px;
-    font-size: 1.05rem;
-    font-style: italic;
-    display: none;
-    text-align: center;
+  /* ---------- Pantalla de confirmación ---------- */
+  .done { display: none; padding-top: 24px; }
+  .done h2 { font-weight: 300; font-size: 1.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 14px; }
+  .done p { font-size: 1.3rem; margin: 0 0 10px; }
+  .done .tick { font-size: 2.4rem; margin-bottom: 8px; }
+  .link {
+    background: none; border: none; width: auto; padding: 6px 0; margin-top: 22px;
+    color: var(--muted); text-decoration: underline; letter-spacing: 0.12em; font-size: 0.9rem;
   }
-  #status.success { color: var(--olive-dark); display: block; }
-  #status.error { color: #8c4a35; display: block; }
 </style>
 </head>
 <body>
-<div class="card">
+<div class="wrap">
+  <h1>Bianca &amp; Rauli</h1>
+  <p class="sub">Confirmá tu asistencia</p>
 
-  <div class="header">
-    <p class="eyebrow">Confirmá tu asistencia</p>
-    <h1>¿Venís a nuestro casamiento?</h1>
-    <p>Esperamos que puedas acompañarnos en este momento tan especial.</p>
-    <p class="note">Completar un formulario por persona</p>
+  <div class="info">
+    <div class="grp">
+      <div class="day">Sábado 27 de febrero</div>
+      <div class="row">
+        <span class="lbl">Ceremonia · 16:30 hs</span>
+        <span class="nm">Nuestra Señora de la Candelaria</span>
+        <span class="ad">Puesta del Sol 696, 20100 Punta del Este, Departamento de Maldonado, Uruguay</span>
+      </div>
+      <div class="row">
+        <span class="lbl">Recepción y fiesta · 19:00 hs</span>
+        <span class="nm">Narbona Punta del Este, El Galpón</span>
+        <span class="ad">Camino de la Vid 20000, Punta del Este</span>
+      </div>
+    </div>
+    <div class="grp">
+      <div class="day">Jueves 25 de febrero</div>
+      <div class="row pre">
+        <span class="lbl">Pre-evento · 18:00 hs</span>
+        <span class="nm">Welcome Sunset Drinks · Mia Bistro</span>
+        <span class="ad">Parada 20 de la Brava, Punta del Este</span>
+      </div>
+    </div>
   </div>
 
-  <form id="rsvpForm">
-    <label for="nombre">Nombre y apellido</label>
-    <input type="text" id="nombre" name="nombre" required>
+  <p class="note" id="note">Completar un formulario por persona</p>
 
-    <label for="evento">¿A qué evento confirmás?</label>
-    <select id="evento" name="evento" required>
-      <option value="">Elegí una opción</option>
-      <option value="Casamiento (Sábado 27/2/27)">Casamiento (Sábado 27/2/27)</option>
-      <option value="Sunset Drinks (Jueves 25/2/27)">Sunset Drinks (Jueves 25/2/27)</option>
-      <option value="A ambos!">A ambos!</option>
-    </select>
+  <form id="rsvpForm" novalidate>
+    <div class="field">
+      <label for="nombre">Nombre y apellido</label>
+      <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+    </div>
 
-    <label for="asiste">¿Vas a asistir?</label>
-    <select id="asiste" name="asiste" required>
-      <option value="">Elegí una opción</option>
-      <option value="Sí, voy!">Sí, voy!</option>
-      <option value="No voy a poder ir">No voy a poder ir</option>
-    </select>
+    <div class="field">
+      <label for="evento">¿A qué evento confirmás?</label>
+      <select id="evento" name="evento" required>
+        <option value="">Elegí una opción</option>
+        <option value="Casamiento (Sábado 27/2/27)">Casamiento (Sábado 27/2/27)</option>
+        <option value="Sunset Drinks (Jueves 25/2/27)">Sunset Drinks (Jueves 25/2/27)</option>
+        <option value="A ambos!">A ambos!</option>
+      </select>
+    </div>
 
-    <label for="restriccion">Restricción alimentaria</label>
-    <select id="restriccion" name="restriccion">
-      <option value="Ninguna">Ninguna</option>
-      <option value="Vegetariano/a">Vegetariano/a</option>
-      <option value="Vegano/a">Vegano/a</option>
-      <option value="Celíaco/a (sin TACC)">Celíaco/a (sin TACC)</option>
-      <option value="Alergias">Alergias (aclarar en mensaje)</option>
-    </select>
+    <div class="field">
+      <label for="asiste">¿Vas a asistir?</label>
+      <select id="asiste" name="asiste" required>
+        <option value="">Elegí una opción</option>
+        <option value="Sí, voy!">Sí, voy!</option>
+        <option value="No voy a poder ir">No voy a poder ir</option>
+      </select>
+    </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+    <div class="field">
+      <label for="restriccion">Restricción alimentaria</label>
+      <select id="restriccion" name="restriccion">
+        <option value="Ninguna">Ninguna</option>
+        <option value="Vegetariano/a">Vegetariano/a</option>
+        <option value="Vegano/a">Vegano/a</option>
+        <option value="Celíaco/a (sin TACC)">Celíaco/a (sin TACC)</option>
+        <option value="Alergias">Alergias (aclarar en mensaje)</option>
+      </select>
+    </div>
 
-    <label for="mensaje">Mensaje (opcional)</label>
-    <textarea id="mensaje" name="mensaje" placeholder="Dejale un mensaje a Bianca y Raul"></textarea>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+
+    <div class="field">
+      <label for="mensaje">Mensaje <span class="optional">(opcional)</span></label>
+      <textarea id="mensaje" name="mensaje" placeholder="Dejale un mensaje a Bianca y Raul"></textarea>
+    </div>
 
     <button type="submit" id="submitBtn">Confirmar</button>
+    <div class="error" id="error" role="alert"></div>
   </form>
 
-  <p id="status"></p>
+  <div class="done" id="done" aria-live="polite">
+    <div class="tick">✓</div>
+    <h2>¡Recibido!</h2>
+    <p id="doneMsg"></p>
+    <p>Gracias por acompañarnos.</p>
+    <button type="button" class="link" id="otra">Confirmar a otra persona</button>
+  </div>
 </div>
 
 <script>
-  // Pegá acá la URL que te da Apps Script al hacer "Implementar > Nueva implementación"
+  // Misma URL de Apps Script que el RSVP original (misma Sheet)
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-h-RV9bNdHB2KWZyryprfp9tJyJSQcM81GZC7WJfzzzdh9Dnhd-NbfpiEjFbSnZFL/exec";
 
   const form = document.getElementById('rsvpForm');
-  const status = document.getElementById('status');
   const btn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('error');
+  const done = document.getElementById('done');
+  const doneMsg = document.getElementById('doneMsg');
+  const note = document.getElementById('note');
+  let sending = false;
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  function showDone(nombre, asiste) {
+    doneMsg.textContent = asiste === 'Sí, voy!'
+      ? nombre + ', tu asistencia quedó confirmada.'
+      : nombre + ', registramos que no vas a poder venir. ¡Te vamos a extrañar!';
+    form.style.display = 'none';
+    note.style.display = 'none';
+    done.style.display = 'block';
+    done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (sending) return;                       // bloquea clicks repetidos
+    errorBox.textContent = '';
+
+    const nombre = form.nombre.value.trim();
+    const email = form.email.value.trim();
+
+    if (!nombre) { errorBox.textContent = 'Escribí tu nombre y apellido.'; form.nombre.focus(); return; }
+    if (!form.evento.value) { errorBox.textContent = 'Elegí a qué evento confirmás.'; form.evento.focus(); return; }
+    if (!form.asiste.value) { errorBox.textContent = 'Contanos si vas a asistir.'; form.asiste.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorBox.textContent = 'Escribí un email válido.'; form.email.focus(); return; }
+
+    sending = true;
     btn.disabled = true;
-    btn.textContent = 'Enviando...';
-    status.style.display = 'none';
+    btn.textContent = 'Enviando…';
 
-    const formData = new FormData(form);
+    const body = new URLSearchParams();
+    body.set('nombre', nombre);
+    body.set('evento', form.evento.value);
+    body.set('asiste', form.asiste.value);
+    body.set('restriccion', form.restriccion.value);
+    body.set('email', email);
+    body.set('mensaje', form.mensaje.value.trim());
+    const asiste = form.asiste.value;
 
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: formData
-    })
-      .then(function () {
-        status.textContent = 'Gracias por confirmar. ¡Los esperamos!';
-        status.className = 'success';
-        form.reset();
+    fetch(SCRIPT_URL, { method: 'POST', body: body })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.result === 'success') {
+          showDone(nombre, asiste);
+        } else {
+          throw new Error('bad response');
+        }
       })
       .catch(function () {
-        status.textContent = 'Hubo un error. Por favor intentá de nuevo.';
-        status.className = 'error';
-      })
-      .finally(function () {
+        errorBox.textContent = 'No pudimos confirmar el envío. Probá de nuevo en unos segundos.';
+        sending = false;
         btn.disabled = false;
         btn.textContent = 'Confirmar';
       });
+  });
+
+  document.getElementById('otra').addEventListener('click', function () {
+    form.reset();
+    sending = false;
+    btn.disabled = false;
+    btn.textContent = 'Confirmar';
+    errorBox.textContent = '';
+    done.style.display = 'none';
+    note.style.display = 'block';
+    form.style.display = 'block';
+    window.scrollTo(0, 0);
   });
 </script>
 </body>
